@@ -1,0 +1,64 @@
+Part 2
+
+What are all the types of pokemon that a pokemon can have?
+
+SELECT name FROM types;
+    normal, water, grass, rock, fire, ground, poison, bug, electric, dragon, steel, dark, fighting, psychic, ghost, fairy, ice, flying
+
+What is the name of the pokemon with id 45?
+
+SELECT name FROM pokemons
+WHERE id = 45;
+    eevee
+
+How many pokemon are there?
+SELECT COUNT(*) FROM pokemons;
+    656
+
+How many types are there?
+SELECT COUNT(*) FROM types;
+    18
+
+How many pokemon have a secondary type?
+SELECT COUNT(secondary_type) FROM pokemons;
+    316
+
+Part 3
+
+What is each pokemon's primary type?
+SELECT p.name, t.name
+FROM pokemons p
+JOIN types t
+ON p.primary_type = t.id;
+
+What is Rufflet's secondary type?
+SELECT p.name, t.name
+FROM pokemons p
+JOIN types t
+ON p.secondary_type = t.id
+WHERE p.name = 'Rufflet';
+
+What are the names of the pokemon that belong to the trainer with trainerID 303?
+SELECT p.name
+FROM pokemon_trainer pt
+JOIN pokemons p
+ON pt.pokemon_id = p.id
+WHERE pt.trainerID = 303;
+
+How many pokemon have a secondary type Poison
+SELECT COUNT(*) FROM(
+    SELECT p.name
+    FROM pokemons p
+    JOIN types t
+    ON p.secondary_type = t.id
+    WHERE t.name = 'Poison') AS poison;
+
+What are all the primary types and how many pokemon have that type?
+SELECT t.name,COUNT(*)
+FROM types t, pokemons p
+WHERE t.id = p.primary_type
+GROUP BY t.name;
+
+How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
+
+
