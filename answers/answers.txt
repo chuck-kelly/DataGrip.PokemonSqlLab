@@ -12,11 +12,11 @@ WHERE id = 45;
     eevee
 
 How many pokemon are there?
-SELECT COUNT(*) FROM pokemons;
+SELECT COUNT(*) as number_pokemon FROM pokemons;
     656
 
 How many types are there?
-SELECT COUNT(*) FROM types;
+SELECT COUNT(*) as number_types FROM types;
     18
 
 How many pokemon have a secondary type?
@@ -26,7 +26,7 @@ SELECT COUNT(secondary_type) FROM pokemons;
 Part 3
 
 What is each pokemon's primary type?
-SELECT p.name, t.name
+SELECT p.name, t.name as primary_type
 FROM pokemons p
 JOIN types t
 ON p.primary_type = t.id;
@@ -60,5 +60,18 @@ WHERE t.id = p.primary_type
 GROUP BY t.name;
 
 How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
+SELECT COUNT(pokemon_id) as num_poke, trainerID
+FROM pokemon_trainer
+WHERE pokelevel = 100
+GROUP BY trainerID;
+
+How many pokemon only belong to one trainer and no other?
+SELECT pt.pokemon_id
+FROM pokemon_trainer pt
+GROUP BY pt.pokemon_id
+HAVING COUNT(pt.pokemon_id) = 1;
+
+
+
 
 
